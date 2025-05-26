@@ -1,11 +1,12 @@
-FROM node:14.17.0
+FROM node:16.20.0
 
 WORKDIR /app
 
 COPY package-lock.json package.json .
 
-RUN npm install eslint --save-dev
+RUN npm install -g eslint
 
+RUN npx eslint --init
 
 RUN npm i
 

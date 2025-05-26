@@ -1,11 +1,20 @@
+# Use a specific Node.js version
 FROM node:14.17.0
 
+# Set the working directory
 WORKDIR /app
 
-COPY package-lock.json package.json .
+# Copy dependency files
+COPY package-lock.json package.json ./
 
-RUN npm i --only=prod
+# Install only production dependencies
+RUN npm ci --only=production
 
-COPY index.js dao.js ./
+# Copy application files
+COPY . .
 
-CMD npm start
+# Expose the default Node.js application port
+EXPOSE 3000
+
+# Start the application
+CMD ["npm", "start"]
